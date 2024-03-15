@@ -1,11 +1,24 @@
+import driver
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
 
 # Launch the browser
 driver = webdriver.Chrome()
+
+# Define your function
+def my_function():
+    # Your function code here
+    pass
+
+# Execute your function if the script is run directly
+if __name__ == "__main__":
+    my_function()
+
+driver.maximize_window ()
 
 driver.get("http://10.10.99.18:8002/login")
 
@@ -91,7 +104,13 @@ login_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID
 
 # Input your credentials
 username_field.send_keys("superadmin@gmail.com")
+
+# Introduce a delay
+# time.sleep(1)
+
 password_field.send_keys("qwerqwer")
+# Introduce a delay
+# time.sleep(1)
 
 # Click the submit button
 login_button.click()
@@ -99,8 +118,5 @@ login_button.click()
 # # Wait for the login process to complete and page to load (you may need to adjust the timeout value)
 # WebDriverWait(driver, 10).until(EC.url_to_be("http://10.10.99.18:8002/dashboard"))
 
-# Pause the script and wait for user input before closing the browser window
-input("Press Enter to close the browser...")
-
-# Close the browser window
-driver.quit()
+# # Close the browser window
+# driver.quit()
