@@ -3,17 +3,17 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium import webdriver
-from input import name
+from input import email
 from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
-from Auditarea_completion import Areacomplete
+from account_completion import usercomplete
 
-class Area:
+class user:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
         pass
 
-    def add_area(self):
+    def add_user(self):
         # Your function code here
         pass
 
@@ -25,36 +25,40 @@ class Area:
 
     def execute(self):
         # Call the add_agency method
-        self.add_area()
+        self.add_user()
 
         # Find the icon element and click on it
-        add_icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#AuditAreaModal']")))
+        add_icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#UserAccountModal']")))
         add_icon.click()
 
         # # Locate the toggle button element by its ID, name, or other locator
         # toggle_button = driver.find_element (By.ID, "ara_active")
         # toggle_button.click ()
 
+        name_dropdown = Select ( driver.find_element ( By.ID, "usr_aur_id" ) )
+        name_dropdown.select_by_index ( 9 )
+
+        level_access_dropdown = Select(driver.find_element(By.ID, "role" ) )
+        level_access_dropdown.select_by_index(2)
+
         # Input text into the input fields
-        self.input_field_text(By.ID, "ara_name", name)
+        self.input_field_text(By.ID, "email", email)
 
-        dropdown = Select(driver.find_element(By.ID, "ara_ara_id"))
-        dropdown.select_by_index(3)
+        reset_button = WebDriverWait ( driver, 10 ).until (
+            EC.visibility_of_element_located ( (By.ID, "reset-password") ) )
+        reset_button.click ()
 
-        icon = WebDriverWait ( driver, 10 ).until (
-            EC.visibility_of_element_located ( (By.ID, "addAuditArea") ) )
-        icon.click ()
+        save_button = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.ID, "addUser")))
+        save_button.click()
 
-        input("Enter key")
-        # msg_instance = Areacomplete()
-        # msg_instance.completion()
-        # msg_instance.execute()
+        message_instance = usercomplete ()
+        message_instance.execute ()
 
-
-# Instantiate the Auditors class and execute its methods
+# Instantiate the class and execute its methods
 if"__main__" == __name__:
-    areas_instance = Areacomplete()
-    areas_instance.execute()
+    account_instance = user()
+    account_instance.execute()
 
 
 
