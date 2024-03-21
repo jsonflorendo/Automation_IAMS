@@ -5,3 +5,8 @@ name_head = "Jimmy S. Santos"
 position_head = "Director"
 contact_details = "sanjuanuniversity@gmail.com, 883781113 local 214"
 
+Column1 = "Name"
+Column2 = "Contact Details"
+Column3 = " Head of Agency & Position"
+Column4 = "Compliance Rating"
+Column5 = "Status"

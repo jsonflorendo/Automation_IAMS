@@ -68,12 +68,8 @@ class Auditors:
         # Click on the date input field to open the date picker
         date_input.clear()
 
-        # Now, you need to locate and click on the specific date in the date picker.
-        # This may vary depending on how the date picker is implemented.
-        # Here's an example of selecting a date by clicking on a specific day element:
-
         # Locate and click on the day element corresponding to the desired date
-        desired_date = "03-15-1986"  # Example date in YYYY-MM-DD format
+        desired_date = "03-15-1986"  # Example date in MM-DD-YYYY format
         date_input.send_keys(desired_date)
 
         self.input_field_text(By.ID, "aur_contact_no", "88378113 Local 310")
