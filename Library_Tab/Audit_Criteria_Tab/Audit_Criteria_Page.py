@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from Login import driver
 0.
 from Library_Tab.Library_icon import my_class
-
+from Assert_criteria import criteriatable
 # Call the Login.py
 my_class()
 
@@ -38,13 +38,15 @@ icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPAT
 # Click on the icon
 icon.click()
 
-auditors_instance = Auditors()
-
-# Call methods of the Agency class
-auditors_instance.add_auditors()  # Call the add_agency method
-
-# Execute the execute method
-auditors_instance.execute()
+assert_criteria = criteriatable()
+assert_criteria.criteria_column_names()
+# auditors_instance = Auditors()
+#
+# # Call methods of the Agency class
+# auditors_instance.add_auditors()  # Call the add_agency method
+#
+# # Execute the execute method
+# auditors_instance.execute()
 
 
 

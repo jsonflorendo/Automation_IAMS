@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Login import driver
+from Assert_auditors import auditortable
 from Library_Tab.Library_icon import my_class
 
 # Call the Login.py
@@ -33,19 +34,18 @@ except Exception as e:
 
 # Find the icon element
 icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//a[@id='pool-auditors-tab']")))
-
-# Click on the icon
 icon.click()
 
-auditors_instance = Auditors()
+assert_auditor = auditortable()
+assert_auditor.auditor_column_names()
 
+auditors_instance = Auditors()
 # Call methods of the Agency class
 auditors_instance.add_auditors()  # Call the add_agency method
-
 # Execute the execute method
 auditors_instance.execute()
 
-
+input("Press enter to continue")
 
 
 

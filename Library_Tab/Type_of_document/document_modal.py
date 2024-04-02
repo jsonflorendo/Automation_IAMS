@@ -28,7 +28,7 @@ class document:
         self.add_document()
 
         # Find the icon element and click on it
-        add_icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#TypeOfDocumentModal']//i[@class='fas fa-plus fa-2x text-white-100']")))
+        add_icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#TypeOfDocumentModal']")))
         add_icon.click()
 
         # # Locate the toggle button element by its ID, name, or other locator

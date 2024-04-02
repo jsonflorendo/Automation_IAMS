@@ -15,6 +15,7 @@ class usercomplete:
     def execute(self):
         # Call the add_agency method
         self.usercompletion()
+        try:
             # Wait for the element containing the text to be visible
             message = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//h2[@id='swal2-title']")))
 

@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from Login import driver
 from Library_Tab. Library_icon import my_class
 from account_modal import user
+from Assert_account import accounttable
 
 # Call the Login.py
 my_class()
@@ -36,6 +37,9 @@ icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 
 
 # Click on the icon
 icon.click()
+
+assert_account = accounttable()
+assert_account.account_column_names()
 
 account_instance = user()
 account_instance.add_user()

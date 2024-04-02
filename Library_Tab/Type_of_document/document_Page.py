@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from Login import driver
 from Library_Tab. Library_icon import my_class
 from document_modal import document
-
+from Assert_document import documenttable
 # Call the Login.py
 my_class()
 
@@ -36,6 +36,9 @@ icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 
 
 # Click on the icon
 icon.click()
+
+assert_document = documenttable ()
+assert_document.document_column_names ()
 
 document_instance = document()
 

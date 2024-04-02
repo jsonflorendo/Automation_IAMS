@@ -27,7 +27,7 @@ class Auditors:
         self.add_auditors()
 
         # Find the icon element and click on it
-        icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#AuditorModal']//i[@class='fas fa-plus fa-2x text-white-100']")))
+        icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#AuditorModal']")))
         icon.click()
 
         # Locate the radio button for Internal
@@ -49,7 +49,7 @@ class Auditors:
         self.input_field_text(By.ID, "aur_name_suffix", name_suffix)
         self.input_field_text(By.ID, "aur_name_prefix", name_prefix)
         self.input_field_text(By.ID, "aur_position", position)
-
+        self.input_field_text ( By.ID, "aur_salary_grade", salary_grade )
 
         dropdown = Select(driver.find_element(By.ID, "aur_agn_id"))
         dropdown.select_by_index(4)
@@ -72,10 +72,10 @@ class Auditors:
         desired_date = "03-15-1986"  # Example date in MM-DD-YYYY format
         date_input.send_keys(desired_date)
 
-        self.input_field_text(By.ID, "aur_contact_no", "88378113 Local 310")
+        self.input_field_text(By.ID, "aur_contact_no", contact_no)
 
         dropdown = Select(driver.find_element (By.ID, "aur_status"))
-        dropdown.select_by_index(4)
+        dropdown.select_by_index(2)
 
         icon = WebDriverWait ( driver, 10 ).until (
             EC.visibility_of_element_located ( (By.ID, "addAuditor") ) )

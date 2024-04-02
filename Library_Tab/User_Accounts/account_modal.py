@@ -35,8 +35,15 @@ class user:
         # toggle_button = driver.find_element (By.ID, "ara_active")
         # toggle_button.click ()
 
-        name_dropdown = Select ( driver.find_element ( By.ID, "usr_aur_id" ) )
-        name_dropdown.select_by_index ( 9 )
+        name_dropdown = WebDriverWait ( driver, 10 ).until (
+            EC.element_to_be_clickable ( (By.ID, "usr_aur_id") )
+        )
+
+        # Once the dropdown is present, convert it into a Select element
+        name_dropdown = Select ( name_dropdown )
+
+        # Select the option by index
+        name_dropdown.select_by_index ( 3 )
 
         level_access_dropdown = Select(driver.find_element(By.ID, "role" ) )
         level_access_dropdown.select_by_index(2)

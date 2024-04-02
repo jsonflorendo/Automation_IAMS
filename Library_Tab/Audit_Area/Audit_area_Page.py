@@ -6,8 +6,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Login import driver
+from Assert_audit_area import areatable
 from Library_Tab.Library_icon import my_class
 from Audit_area_modal import Area
+
 
 # Call the Login.py
 my_class()
@@ -33,17 +35,17 @@ except Exception as e:
 
 # Find the icon element
 icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "audit-areas-tab")))
-
 # Click on the icon
 icon.click()
 
-areas_instance = Area()
+assert_area = areatable ()
+assert_area.area_column_names ()
 
-# Call methods of the Agency class
-areas_instance.add_area()  # Call the add_agency method
-
-# Execute the execute method
-areas_instance.execute()
+# areas_instance = Area()
+# # Call methods of the Agency class
+# areas_instance.add_area()  # Call the add_agency method
+# # Execute the execute method
+# areas_instance.execute()
 
 input("Please enter...")
 
