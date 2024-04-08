@@ -6,7 +6,7 @@ from selenium import webdriver
 from input import *
 from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
-
+from modal_assert_citeria import ModalTest
 class Auditors:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
@@ -27,8 +27,11 @@ class Auditors:
         self.add_auditors()
 
         # Find the icon element and click on it
-        icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#AuditCriteriaModal']//i[@class='fas fa-plus fa-2x text-white-100']")))
+        icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#AuditCriteriaModal']")))
         icon.click()
+
+        assert_text = ModalTest ()
+        assert_text.execute ()
 
         # Locate the radio button for Internal
         radio_button =WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "cra_active")))
@@ -45,7 +48,7 @@ class Auditors:
         # Input text into the input fields
         self.input_field_text(By.ID, "cra_name", name)
 
-        audit_area = Select(driver.find_element (By.XPATH, "//span[@class='select2 select2-container select2-container--default select2-container--below']"))
+        audit_area = Select(driver.find_element (By.ID, "cra_areas"))
         indices_to_select = [1, 4, 6]  # Example indices of options to select
         for index in indices_to_select:
             audit_area.select_by_index(index)

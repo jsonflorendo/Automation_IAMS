@@ -7,7 +7,7 @@ from input import name
 from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
 from document_completion import documentcomplete
-
+from modal_assert_document import ModalTest
 class document:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
@@ -31,6 +31,8 @@ class document:
         add_icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#TypeOfDocumentModal']")))
         add_icon.click()
 
+        assert_text = ModalTest ()
+        assert_text.execute ()
         # # Locate the toggle button element by its ID, name, or other locator
         # toggle_button = driver.find_element (By.ID, "ara_active")
         # toggle_button.click ()

@@ -9,6 +9,7 @@ from Login import driver
 from Library_Tab.Library_icon import my_class
 from Agency_modal import Agencies
 from Assert_agencies import agencytable
+import unittest
 # Call the Login.py
 my_class()
 
@@ -38,7 +39,8 @@ icon.click()
 assert_agencies = agencytable()
 assert_agencies.agencies_column_names()
 
-
+agencies_instance = Agencies()
+agencies_instance.execute()
 
 input("Please enter...")
 

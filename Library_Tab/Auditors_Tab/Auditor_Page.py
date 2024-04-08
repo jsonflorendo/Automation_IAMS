@@ -1,13 +1,13 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from datetime import time
-from Auditor_input import Auditors
+from Auditor_modal import Auditors
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Login import driver
-from Assert_auditors import auditortable
+from Assert_auditors_table import auditortable
 from Library_Tab.Library_icon import my_class
 
 # Call the Login.py
@@ -40,9 +40,6 @@ assert_auditor = auditortable()
 assert_auditor.auditor_column_names()
 
 auditors_instance = Auditors()
-# Call methods of the Agency class
-auditors_instance.add_auditors()  # Call the add_agency method
-# Execute the execute method
 auditors_instance.execute()
 
 input("Press enter to continue")

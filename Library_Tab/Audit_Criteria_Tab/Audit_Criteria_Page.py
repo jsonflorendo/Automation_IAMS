@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from datetime import time
-from Auditor_criteria_input import Auditors
+from Auditor_criteria_modal import Auditors
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from Login import driver
 0.
 from Library_Tab.Library_icon import my_class
-from Assert_criteria import criteriatable
+from Assert_criteria_table import criteriatable
 # Call the Login.py
 my_class()
 
@@ -40,13 +40,9 @@ icon.click()
 
 assert_criteria = criteriatable()
 assert_criteria.criteria_column_names()
-# auditors_instance = Auditors()
-#
-# # Call methods of the Agency class
-# auditors_instance.add_auditors()  # Call the add_agency method
-#
-# # Execute the execute method
-# auditors_instance.execute()
+
+auditors_instance = Auditors()
+auditors_instance.execute()
 
 
 

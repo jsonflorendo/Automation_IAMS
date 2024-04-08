@@ -1,3 +1,15 @@
+#Assert modal Name
+Modal_name = "Agency"
+
+#Assert modal field name
+F1 = "Name"
+F2 = "Short Name / Acronym"
+F3 = "Address"
+F4 = "Name of Head of Agency"
+F5 = "Position of Head of Agency"
+F6 = "Contact Details"
+
+#Input text
 name = "San Juan University"
 short_name = "SJU"
 address = "48 Pinagsama St. Pandacan, Quezon City"
@@ -10,3 +22,4 @@ Column2 = "Contact Details"
 Column3 = " Head of Agency & Position"
 Column4 = "Compliance Rating"
 Column5 = "Status"
+

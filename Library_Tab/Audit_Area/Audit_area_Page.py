@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Login import driver
-from Assert_audit_area import areatable
+from Assert_area_table import areatable
 from Library_Tab.Library_icon import my_class
 from Audit_area_modal import Area
 
@@ -41,14 +41,8 @@ icon.click()
 assert_area = areatable ()
 assert_area.area_column_names ()
 
-# areas_instance = Area()
-# # Call methods of the Agency class
-# areas_instance.add_area()  # Call the add_agency method
-# # Execute the execute method
-# areas_instance.execute()
-
-input("Please enter...")
-
+areas_instance = Area ()
+areas_instance.execute ()
 
 
 

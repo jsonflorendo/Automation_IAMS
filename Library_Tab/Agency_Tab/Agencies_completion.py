@@ -17,17 +17,17 @@ class Agenciescomplete:
         self.agenciescompletion()
         try:
             # Wait for the element containing the text to be visible
-            message = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "swal2-title]")))
+            message = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//h2[@id='swal2-title']")))
 
             # Get the text content of the element
             actual_text = message.text.strip()
 
             # Define the expected text
-            expected_text = "Agency added successfully."
+            expected_text = "Agency added successfully"
 
             # Assert that the expected text is present in the actual text
             assert expected_text in actual_text, f"Expected text '{expected_text}' not found in actual text '{actual_text}'"
-            print("Text assertion passed: Agency added successfully.")
+            print("Text assertion passed: Agency added successfully")
 
         except Exception as e:
             # Handle any exceptions or assertion failures

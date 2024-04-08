@@ -27,7 +27,7 @@ class Auditorscomplete:
 
             # Assert that the expected text is present in the actual text
             assert expected_text in actual_text, f"Expected text '{expected_text}' not found in actual text '{actual_text}'"
-            print("Text assertion passed: Auditor successfully saved!")
+            print("Text assertion passed: Auditor added successfully")
 
         except Exception as e:
             # Handle any exceptions or assertion failures

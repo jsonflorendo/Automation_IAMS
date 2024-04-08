@@ -33,7 +33,7 @@ class Areacomplete:
             # Handle any exceptions or assertion failures
             print ( f"An error occurred: {e}" )
 
-            ok_button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#addAuditArea")))
+            ok_button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[normalize-space()='OK']")))
             ok_button.click()
 
 if"__main__" == __name__:

@@ -7,7 +7,7 @@ from input import name
 from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
 from Auditarea_completion import Areacomplete
-
+from modal_assert_area import ModalTest
 class Area:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
@@ -31,6 +31,9 @@ class Area:
         add_icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#AuditAreaModal']")))
         add_icon.click()
 
+        assert_text = ModalTest ()
+        assert_text.execute ()
+
         # # Locate the toggle button element by its ID, name, or other locator
         # toggle_button = driver.find_element (By.ID, "ara_active")
         # toggle_button.click ()
@@ -41,12 +44,11 @@ class Area:
         dropdown = Select(driver.find_element(By.ID, "ara_ara_id"))
         dropdown.select_by_index(9)
 
-        icon = WebDriverWait(driver, 10).until(
+        save_button = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, "//button[@id='addAuditArea']")))
-        icon.click()
+        save_button.click()
 
         area_message_instance = Areacomplete ()
-        area_message_instance.areacompletion ()
         area_message_instance.execute ()
 
 

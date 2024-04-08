@@ -7,6 +7,7 @@ from input import email
 from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
 from account_completion import usercomplete
+from modal_assert import ModalTest
 
 class user:
     def __init__(self):
@@ -27,13 +28,17 @@ class user:
         # Call the add_agency method
         self.add_user()
 
-        # Find the icon element and click on it
-        add_icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#UserAccountModal']")))
-        add_icon.click()
+        # Wait for the modal to appear
+        add_icon = WebDriverWait ( driver, 10 ).until (
+            EC.visibility_of_element_located ( (By.XPATH, "//button[@data-bs-target='#UserAccountModal']") ) )
+        add_icon.click ()
 
         # # Locate the toggle button element by its ID, name, or other locator
         # toggle_button = driver.find_element (By.ID, "ara_active")
         # toggle_button.click ()
+
+        assert_text = ModalTest()
+        assert_text.execute()
 
         name_dropdown = WebDriverWait ( driver, 10 ).until (
             EC.element_to_be_clickable ( (By.ID, "usr_aur_id") )
@@ -61,6 +66,9 @@ class user:
 
         message_instance = usercomplete ()
         message_instance.execute ()
+
+
+
 
 # Instantiate the class and execute its methods
 if"__main__" == __name__:

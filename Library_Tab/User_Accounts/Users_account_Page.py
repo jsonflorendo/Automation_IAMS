@@ -10,6 +10,7 @@ from Library_Tab. Library_icon import my_class
 from account_modal import user
 from Assert_account import accounttable
 
+
 # Call the Login.py
 my_class()
 
@@ -34,8 +35,6 @@ except Exception as e:
 
 # Find the icon element
 icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "user-accounts-tab")))
-
-# Click on the icon
 icon.click()
 
 assert_account = accounttable()

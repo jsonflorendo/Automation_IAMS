@@ -7,7 +7,7 @@ from input import name
 from Library_Tab.Type_of_audit.audit_completion import auditcomplete
 from Login import driver
 from audit_completion import auditcomplete
-
+from modal_assert_audit import ModalTest
 class audit:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
@@ -30,6 +30,9 @@ class audit:
         # Find the icon element and click on it
         add_icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#TypeOfAuditModal']")))
         add_icon.click()
+
+        assert_text = ModalTest ()
+        assert_text.execute ()
 
         # Input text into the input fields
         self.input_field_text(By.ID, "aud_name", name)

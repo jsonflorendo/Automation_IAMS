@@ -33,29 +33,6 @@ class criteriatable(unittest.TestCase):
         except Exception as e:
             # Handle any exceptions or assertion failures
             print ( f"An error occurred: {e}" )
-#
-# # Assert table data to data from edit modal
-#             # Locate the table cell containing the text you want to assert
-#             table_cell_xpath = "//table[@id='table_id']/tbody/tr[1]/td[2]"
-#
-#             table_cell = WebDriverWait ( driver, 10 ).until (
-#                 EC.visibility_of_element_located ( (By.XPATH, table_cell_xpath) ) )
-#
-#             # Get the text from the table cell
-#             table_cell_text = table_cell.text
-#
-#             # Locate the edit modal
-#             edit_modal = driver.find_element ( By.ID, "edit_modal" )
-#
-#             # Locate the input field in the edit modal containing the corresponding data
-#             input_field = edit_modal.find_element ( By.ID,
-#                                                     "input_field_id" )  # Replace "input_field_id" with the actual ID of the input field
-#
-#             # Get the text from the input field in the edit modal
-#             edit_modal_text = input_field.get_attribute ( "value" )
-#
-#             # Assert the text
-#             assert table_cell_text == edit_modal_text, f"Text in table cell '{table_cell_text}' does not match text in edit modal '{edit_modal_text}'"
 
 if __name__ == "__main__":
     assert_criteria = criteriatable()

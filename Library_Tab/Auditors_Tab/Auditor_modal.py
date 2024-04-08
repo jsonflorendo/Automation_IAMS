@@ -6,7 +6,7 @@ from selenium import webdriver
 from input import *
 from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
-
+from  modal_assert_auditors import ModalTest
 class Auditors:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
@@ -29,6 +29,9 @@ class Auditors:
         # Find the icon element and click on it
         icon = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//button[@data-bs-target='#AuditorModal']")))
         icon.click()
+
+        assert_text = ModalTest ()
+        assert_text.execute ()
 
         # Locate the radio button for Internal
         radio_button =WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "aur_external_0")))
