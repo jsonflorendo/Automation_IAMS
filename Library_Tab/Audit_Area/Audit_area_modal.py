@@ -8,6 +8,7 @@ from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
 from Auditarea_completion import Areacomplete
 from modal_assert_area import ModalTest
+from error_message_area import error_message
 class Area:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
@@ -33,6 +34,9 @@ class Area:
 
         assert_text = ModalTest ()
         assert_text.execute ()
+
+        area_error = error_message ()
+        area_error.execute ()
 
         # # Locate the toggle button element by its ID, name, or other locator
         # toggle_button = driver.find_element (By.ID, "ara_active")

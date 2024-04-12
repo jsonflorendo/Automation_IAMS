@@ -8,6 +8,7 @@ from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
 from account_completion import usercomplete
 from modal_assert import ModalTest
+from error_message_user_account import ErrorMessageChecker
 
 class user:
     def __init__(self):
@@ -39,6 +40,9 @@ class user:
 
         assert_text = ModalTest()
         assert_text.execute()
+
+        error_checker = ErrorMessageChecker ()
+        error_checker.execute ()
 
         name_dropdown = WebDriverWait ( driver, 10 ).until (
             EC.element_to_be_clickable ( (By.ID, "usr_aur_id") )

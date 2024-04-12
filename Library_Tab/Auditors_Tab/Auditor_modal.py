@@ -7,6 +7,8 @@ from input import *
 from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
 from  modal_assert_auditors import ModalTest
+from error_message_auditor import ErrorMessageChecker
+from existing_error_message_auditor import ExistingerrorMessage
 class Auditors:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
@@ -32,6 +34,9 @@ class Auditors:
 
         assert_text = ModalTest ()
         assert_text.execute ()
+
+        error_checker = ErrorMessageChecker ()
+        error_checker.execute ()
 
         # Locate the radio button for Internal
         radio_button =WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "aur_external_0")))
@@ -80,9 +85,12 @@ class Auditors:
         dropdown = Select(driver.find_element (By.ID, "aur_status"))
         dropdown.select_by_index(2)
 
-        icon = WebDriverWait ( driver, 10 ).until (
+        save_button = WebDriverWait ( driver, 10 ).until (
             EC.visibility_of_element_located ( (By.ID, "addAuditor") ) )
-        icon.click ()
+        save_button.click ()
+
+        error_checker = ExistingerrorMessage ()
+        error_checker.execute ()
 
         message_instance = Auditorscomplete ()
         message_instance.completion ()

@@ -9,6 +9,7 @@ from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
 from modal_assert_agencies import ModalTest
 from Agencies_completion import Agenciescomplete
+from error_message_assert import error_message
 
 class Agencies:
 
@@ -35,6 +36,9 @@ class Agencies:
 
         assert_text = ModalTest ()
         assert_text.execute ()
+
+        assert_error = error_message ()
+        assert_error.execute ()
 
         # Input text into the input fields
         self.input_field_text(By.ID, "agn_name", name)

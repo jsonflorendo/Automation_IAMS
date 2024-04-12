@@ -8,6 +8,7 @@ from Library_Tab.Type_of_audit.audit_completion import auditcomplete
 from Login import driver
 from audit_completion import auditcomplete
 from modal_assert_audit import ModalTest
+from error_message_audit import ErrorMessageChecker
 class audit:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
@@ -34,12 +35,15 @@ class audit:
         assert_text = ModalTest ()
         assert_text.execute ()
 
+        error_checker = ErrorMessageChecker ()
+        error_checker.execute ()
+
         # Input text into the input fields
         self.input_field_text(By.ID, "aud_name", name)
 
-        icon = WebDriverWait(driver, 10).until(
+        save_button = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.ID, "addTypeOfAudit")))
-        icon.click()
+        save_button.click()
 
         message_instance = auditcomplete ()
         message_instance.execute ()

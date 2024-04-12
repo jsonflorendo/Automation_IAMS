@@ -8,6 +8,7 @@ from Library_Tab.Auditors_Tab.Auditor_completion import Auditorscomplete
 from Login import driver
 from document_completion import documentcomplete
 from modal_assert_document import ModalTest
+from error_message_document import ErrorMessageChecker
 class document:
     def __init__(self):
         # Initialize any instance-specific attributes here, if needed
@@ -33,6 +34,10 @@ class document:
 
         assert_text = ModalTest ()
         assert_text.execute ()
+
+        error_checker = ErrorMessageChecker ()
+        error_checker.execute ()
+
         # # Locate the toggle button element by its ID, name, or other locator
         # toggle_button = driver.find_element (By.ID, "ara_active")
         # toggle_button.click ()
@@ -40,9 +45,9 @@ class document:
         # Input text into the input fields
         self.input_field_text(By.ID, "typ_name", name)
 
-        icon = WebDriverWait(driver, 10).until(
+        save_button = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.ID, "addTypeOfDocument")))
-        icon.click()
+        save_button.click()
 
         message_instance = documentcomplete ()
         message_instance.execute ()
