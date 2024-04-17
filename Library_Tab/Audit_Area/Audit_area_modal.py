@@ -46,7 +46,7 @@ class Area:
         self.input_field_text(By.ID, "ara_name", name)
 
         dropdown = Select(driver.find_element(By.ID, "ara_ara_id"))
-        dropdown.select_by_index(9)
+        dropdown.select_by_index(2)
 
         save_button = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, "//button[@id='addAuditArea']")))

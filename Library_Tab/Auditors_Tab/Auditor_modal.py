@@ -59,13 +59,37 @@ class Auditors:
         self.input_field_text(By.ID, "aur_position", position)
         self.input_field_text ( By.ID, "aur_salary_grade", salary_grade )
 
-        dropdown = Select(driver.find_element(By.ID, "aur_agn_id"))
-        dropdown.select_by_index(4)
+        # Find the dropdown element
+        agency_dropdown = Select(driver.find_element(By.ID, "aur_agn_id"))
+        agency_dropdown.select_by_index(0)
 
-        dropdown = Select (driver.find_element (By.ID, "aur_expertise"))
-        indices_to_select = [1, 4, 6]  # Example indices of options to select
-        for index in indices_to_select:
-            dropdown.select_by_index(index)
+        # Check if the dropdown has options
+        if len ( agency_dropdown.options ) == 0:
+            # If the dropdown has no options, find and click the "Add" button
+            add_button = driver.find_element(By. XPATH,
+                "//button[@class='btn btn-outline-secondary add-another-agency']" )  # Replace "add_button_id" with the actual ID of your "Add" button
+            add_button.click ()
+        else:
+            # If the dropdown has options, select an option (optional)
+            agency_dropdown.select_by_index ( 2 )  # Select the first option (index 0) as an example
+
+            expertise_dropdown = Select ( driver.find_element ( By.ID, "aur_expertise" ) )
+            expertise_dropdown.select_by_index ( 0 )
+
+            # Check if the dropdown has options
+            if len ( expertise_dropdown.options ) == 0:
+                # If the dropdown has no options, find and click the "Add" button
+                add_button = driver.find_element(By. XPATH,
+                    "//body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[2]/form[1]/div[12]/div[1]/button[1]" )  # Replace "add_button_id" with the actual ID of your "Add" button
+                add_button.click ()
+            else:
+                # If the dropdown has options, select an option (optional)
+                agency_dropdown.select_by_index ( 2 )  # Select the first option (index 0) as an example
+
+        # expertise_dropdown = Select (driver.find_element (By.ID, "aur_expertise"))
+        # indices_to_select = [1, 4, 6]  # Example indices of options to select
+        # for index in indices_to_select:
+        #     expertise_dropdown.select_by_index(index)
 
 
         self.input_field_text (By.ID, "aur_email", email)
