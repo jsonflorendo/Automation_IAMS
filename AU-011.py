@@ -1,32 +1,17 @@
-from selenium import webdriver
+from LOGIN import AuditLogin
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
-driver = webdriver.Chrome()
-driver.get("http://10.10.99.18:8002/login")
-driver.maximize_window()
+login = AuditLogin()
+login.login()
+login.go_to_audit_page()
 
-wait = WebDriverWait(driver, 20)
+driver = login.driver
+wait = login.wait
 
 try:
-    username = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-    password = driver.find_element(By.NAME, "password")
-
-    username.clear()
-    username.send_keys("Superadmin@gmail.com")
-
-    password.clear()
-    password.send_keys("Dost@123")
-    password.send_keys(Keys.RETURN)
-
-    wait.until(EC.url_contains("/dashboard"))
-
-    driver.get("http://10.10.99.18:8002/audit")
-
     target_cell = wait.until(EC.presence_of_element_located((
         By.CSS_SELECTOR, "#DataTables_Table_1 > tbody > tr:nth-child(3) > td:nth-child(2)"
     )))
@@ -54,8 +39,9 @@ try:
     if len(select.options) > 1:
         select.select_by_index(1)
     else:
-        driver.quit()
+        login.quit()
         exit()
+
     time.sleep(1)
 
     fle_desc = wait.until(EC.presence_of_element_located((By.ID, "fle_desc")))
@@ -73,6 +59,7 @@ try:
         attach_button.click()
     except:
         driver.execute_script("arguments[0].click();", attach_button)
+
     time.sleep(2)
 
     file_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
@@ -80,5 +67,4 @@ try:
     time.sleep(3)
 
 finally:
-    driver.quit()
-
+    login.quit()

@@ -1,31 +1,18 @@
-from selenium import webdriver
+from LOGIN import AuditLogin
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
-driver = webdriver.Chrome()
-driver.get("http://10.10.99.18:8002/login")
-driver.maximize_window()
-
-wait = WebDriverWait(driver, 20)
+login_bot = AuditLogin()
 
 try:
-    username = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-    password = driver.find_element(By.NAME, "password")
+    login_bot.login()
+    login_bot.go_to_audit_page()
 
-    username.clear()
-    username.send_keys("Superadmin@gmail.com")
-
-    password.clear()
-    password.send_keys("Dost@123")
-    password.send_keys(Keys.RETURN)
-
-    wait.until(EC.url_contains("/dashboard"))
-
-    driver.get("http://10.10.99.18:8002/audit")
+    wait = login_bot.wait
+    driver = login_bot.driver
 
     target_cell = wait.until(EC.presence_of_element_located((
         By.CSS_SELECTOR, "#DataTables_Table_1 > tbody > tr:nth-child(3) > td:nth-child(2)"
@@ -41,7 +28,6 @@ try:
     dropdown_element = wait.until(EC.presence_of_element_located((By.ID, "auditPlanSelect")))
     select = Select(dropdown_element)
     select.select_by_visible_text("III. Audit Objectives")
-
     time.sleep(1)
 
     button_icon = wait.until(EC.presence_of_element_located((
@@ -73,15 +59,28 @@ try:
     add_audit_objective_button = wait.until(EC.presence_of_element_located((
         By.CSS_SELECTOR, "#addAuditObjective"
     )))
+
+    add_action_plan_button = wait.until(EC.presence_of_element_located((
+        By.CSS_SELECTOR, "button.btn.btn-primary.btn-sm.add-action-plan-button"
+    )))
     try:
-        add_audit_objective_button.click()
+        add_action_plan_button.click()
     except Exception:
-        driver.execute_script("arguments[0].click();", add_audit_objective_button)
+        driver.execute_script("arguments[0].click();", add_action_plan_button)
+
+    new_action_plan_textarea = wait.until(EC.visibility_of_element_located((
+        By.CSS_SELECTOR, "#actionPlansEntry > div.row.align-items-center.mb-3.entry-field.add-entry > div.col-md-9 > textarea"
+    )))
+    driver.execute_script("arguments[0].value = arguments[1];", new_action_plan_textarea, "THIS IS SAMPLE ACTION ONLY")
 
     time.sleep(2)
 
-except Exception as e:
-    pass
+    add_audit_objective_button = wait.until(EC.presence_of_element_located((
+        By.CSS_SELECTOR, "#addAuditObjective"
+    )))
+    driver.execute_script("arguments[0].click();", add_audit_objective_button)
+
+    time.sleep(2)
 
 finally:
-    driver.quit()
+    login_bot.quit()

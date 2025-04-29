@@ -1,32 +1,18 @@
-from selenium import webdriver
+from LOGIN import AuditLogin
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
 import time
 
-driver = webdriver.Chrome()
-driver.get("http://10.10.99.18:8002/login")
-driver.maximize_window()
+login_bot = AuditLogin()
+login_bot.login()
+login_bot.go_to_audit_page()
 
-wait = WebDriverWait(driver, 20)
+driver = login_bot.driver
+wait = login_bot.wait
 
 try:
-    username = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-    password = driver.find_element(By.NAME, "password")
-
-    username.clear()
-    username.send_keys("Superadmin@gmail.com")
-
-    password.clear()
-    password.send_keys("Dost@123")
-    password.send_keys(Keys.RETURN)
-
-    wait.until(EC.url_contains("/dashboard"))
-
-    driver.get("http://10.10.99.18:8002/audit")
-
     add_icon_colored = wait.until(EC.element_to_be_clickable((By.XPATH, "//i[@class='fas fa-plus text-white-100']")))
     add_icon_colored.click()
 
@@ -37,7 +23,8 @@ try:
     audit_title_field.send_keys("Annual Compliance Audit")
 
     audit_type_dropdown = wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//span[contains(@class, 'select2-selection')]")))
+        EC.element_to_be_clickable((By.XPATH, "//span[contains(@class, 'select2-selection')]"))
+    )
     audit_type_dropdown.click()
 
     audit_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//li[contains(text(), 'Environmental')]")))
@@ -64,9 +51,7 @@ try:
     remarks_field.send_keys("Automated remarks entry by Selenium.")
 
     field_to_input = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#audit-form > div:nth-child(4) > div > span > span.selection > span")))
-
     field_to_input.click()
-
     field_to_input.send_keys("SAMPLE")
     field_to_input.send_keys(Keys.RETURN)
 
@@ -76,5 +61,4 @@ try:
     time.sleep(2)
 
 finally:
-    driver.quit()
-
+    login_bot.quit()

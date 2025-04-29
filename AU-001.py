@@ -1,25 +1,17 @@
-from selenium import webdriver
+from LOGIN import AuditLogin
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-driver = webdriver.Chrome()
-driver.get("http://10.10.99.18:8002/login")
-driver.maximize_window()
-wait = WebDriverWait(driver, 10)
+login_bot = AuditLogin()
 
 try:
-    username = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-    password = driver.find_element(By.NAME, "password")
-    username.send_keys("Superadmin@gmail.com")
-    password.send_keys("Dost@123")
-    password.send_keys(Keys.RETURN)
+    login_bot.login()
+    login_bot.go_to_audit_page()
 
-    wait.until(EC.url_contains("/dashboard"))
-
-    driver.get("http://10.10.99.18:8002/audit")
+    wait = login_bot.wait
+    driver = login_bot.driver
 
     cell = wait.until(EC.presence_of_element_located(
         (By.CSS_SELECTOR, "#DataTables_Table_1 > tbody > tr:nth-child(3) > td:nth-child(5)")
@@ -38,6 +30,7 @@ try:
     )))
     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", button)
     time.sleep(0.5)
+
     try:
         button.click()
     except:
@@ -63,6 +56,7 @@ try:
     add_auditee_button = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#addAuditee")))
     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", add_auditee_button)
     time.sleep(0.5)
+
     try:
         add_auditee_button.click()
     except:
@@ -70,5 +64,8 @@ try:
 
     time.sleep(3)
 
+except Exception as e:
+    pass
+
 finally:
-    driver.quit()
+    login_bot.quit()

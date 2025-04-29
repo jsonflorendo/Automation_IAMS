@@ -1,36 +1,21 @@
-from selenium import webdriver
+from LOGIN import AuditLogin
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-driver = webdriver.Chrome()
-driver.get("http://10.10.99.18:8002/login")
-driver.maximize_window()
-
-wait = WebDriverWait(driver, 20)
+login_bot = AuditLogin()
 
 try:
-    username = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-    password = driver.find_element(By.NAME, "password")
+    login_bot.login()
+    login_bot.go_to_audit_page()
 
-    username.clear()
-    username.send_keys("Superadmin@gmail.com")
-
-    password.clear()
-    password.send_keys("Dost@123")
-    password.send_keys(Keys.RETURN)
-
-    wait.until(EC.url_contains("/dashboard"))
-
-    driver.get("http://10.10.99.18:8002/audit")
+    wait = login_bot.wait
+    driver = login_bot.driver
 
     target_cell = wait.until(EC.presence_of_element_located(
         (By.CSS_SELECTOR, "#DataTables_Table_1 > tbody > tr:nth-child(3) > td:nth-child(2)")
     ))
     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", target_cell)
-    time.sleep(0.5)
     try:
         target_cell.click()
     except:
@@ -38,47 +23,63 @@ try:
 
     dropdown_icon = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#dropdownMenuLink > i")))
     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", dropdown_icon)
-    time.sleep(0.5)
     try:
         dropdown_icon.click()
     except:
         driver.execute_script("arguments[0].click();", dropdown_icon)
 
     try:
-        time.sleep(1.5)
         secretary_directive = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#secretaryDirective")))
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", secretary_directive)
-        time.sleep(0.3)
         try:
             secretary_directive.click()
         except:
             driver.execute_script("arguments[0].click();", secretary_directive)
-    except Exception as e:
+    except:
         pass
 
     try:
-        time.sleep(1)
-        select2_container = driver.execute_script("return document.querySelector('#select2-tpl_name-container')")
-        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", select2_container)
-        time.sleep(0.5)
-        select2_container.click()
+        tpl_name_container = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#select2-tpl_name-container")))
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", tpl_name_container)
+        tpl_name_container.click()
 
-        time.sleep(1)
-        communication_letter_option = wait.until(EC.element_to_be_clickable(
-            (By.XPATH, "//ul[@id='select2-tpl_name-results']/li[contains(text(), 'Communication Letter')]")
-        ))
-        communication_letter_option.click()
+        search_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input.select2-search__field")))
+        search_input.send_keys("SAMPLE SUBJECT TEMPLATE")
 
-        time.sleep(1)
-        update_btn = wait.until(EC.element_to_be_clickable(
-            (By.CSS_SELECTOR, "#addOrUpdateEmailTemplate")
-        ))
-        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", update_btn)
-        update_btn.click()
+        sample_subject_option = wait.until(EC.element_to_be_clickable((
+            By.XPATH, "//ul[@id='select2-tpl_name-results']/li[contains(text(), 'SAMPLE SUBJECT TEMPLATE')]"
+        )))
+        sample_subject_option.click()
+    except:
+        pass
 
-    except Exception as e:
+    try:
+        subject_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#subject")))
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", subject_input)
+        subject_input.clear()
+        subject_input.send_keys("SAMPLE SUBJECT TEMPLATE")
+    except:
+        pass
+
+    try:
+        add_tpl_attachment_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#addTplAttachment")))
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", add_tpl_attachment_button)
+        add_tpl_attachment_button.click()
+
+        file_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
+        file_input.send_keys(r"C:\Users\Acer\OneDrive\2016-Succession-Q-A_092046.pdf")
+
+    except:
+        pass
+    try:
+        add_or_update_email_template_button = wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "#addOrUpdateEmailTemplate")))
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", add_or_update_email_template_button)
+        add_or_update_email_template_button.click()
+
+        time.sleep(9)
+    except:
         pass
 
 finally:
-    time.sleep(3)
-    driver.quit()
+    login_bot.quit()
