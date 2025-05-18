@@ -18,8 +18,6 @@ if len(driver.window_handles) > 1:
 
 driver.get("http://10.10.99.18:8002/audit")
 
-# driver.execute_script("document.body.style.zoom='80%'")
-
 import re
 
 def clean_text(text):
